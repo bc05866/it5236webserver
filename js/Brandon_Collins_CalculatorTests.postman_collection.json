@@ -1,0 +1,52 @@
+{
+	"info": {
+		"_postman_id": "09e5f88b-5f45-4f1b-82a7-4c22411bde12",
+		"name": "CalcTests_Newest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Brandon_Collins_CalculatorTests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7306196e-7b6f-4bb3-99df-af1f6036ac02",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Title element exists and equals UI Calculator\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include('<title>UI Calculator</title>');\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://brandoncollins.tech/",
+					"protocol": "https",
+					"host": [
+						"brandoncollins",
+						"tech"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
