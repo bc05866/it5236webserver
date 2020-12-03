@@ -1,0 +1,183 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API w/ Parallelogram Function - Brandon Collins",
+    "description": "This is a simple API for a function-implemented calculator created using HTML5, Javascript, and Cloud Functioning.",
+    "contact": {
+      "email": "bc05866@georgiasouthern.edu"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/IT5236calculator/Parallelogram/1.0.0",
+      "description": "SwaggerHub API for Parallelogram"
+    },
+    {
+      "url": "https://brandoncollins.tech/jsapi/v1.0/calculator.php",
+      "description": "Production endpoint"
+    }
+  ],
+  "tags": [
+    {
+      "name": "public",
+      "description": "Publicly accessible endpoints"
+    },
+    {
+      "name": "developers",
+      "description": "Operations available to regular developers"
+    }
+  ],
+  "paths": {
+    "/calculator": {
+      "get": {
+        "tags": [
+          "public"
+        ],
+        "summary": "Performs calculations",
+        "description": "By passing in the appropriate option, you can find the adjacent angle of a parallelogram given your angle degree input.",
+        "operationId": "calc",
+        "parameters": [
+          {
+            "name": "number",
+            "in": "query",
+            "description": "angle degree for operation",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 180,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "operation",
+            "in": "query",
+            "description": "subtracting 180 from given angle degree to find adjacent angle degree",
+            "required": false,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "maximum": 180,
+              "minimum": 0,
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "function executed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/InventoryItem"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid number supplied"
+          },
+          "404": {
+            "description": "Number does not exist"
+          },
+          "409": {
+            "description": "not a number"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds an inventory item",
+        "description": "Adds an item to the system",
+        "operationId": "addInventory",
+        "requestBody": {
+          "description": "Inventory item to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InventoryItem"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "item created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "InventoryItem": {
+        "required": [
+          "id",
+          "manufacturer",
+          "name",
+          "releaseDate"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "d290f1ee-6c54-4b01-90e6-d701748f0851"
+          },
+          "name": {
+            "type": "string",
+            "example": "Widget Adapter"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2016-08-29T09:12:33.001Z"
+          },
+          "manufacturer": {
+            "$ref": "#/components/schemas/Manufacturer"
+          }
+        }
+      },
+      "Manufacturer": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "ACME Corporation"
+          },
+          "homePage": {
+            "type": "string",
+            "format": "url",
+            "example": "https://www.acme-corp.com"
+          },
+          "phone": {
+            "type": "string",
+            "example": "408-867-5309"
+          }
+        }
+      }
+    }
+  }
+}
