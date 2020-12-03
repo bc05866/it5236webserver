@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Collins API Calculator</title>
+		<meta name="author" content="Brandon Collins">
+	</head>
+	<body>
+		<h1>API Calculator w/ Parallelogram Function - Brandon Collins</h1>
+		<label for="x">Enter the degree of your angle:</label>
+		<input type="number" step=".01" id="x" name="x">
+		<button onclick="return calc();">Find Adjacent Angle</button>
+		<p id="answer"></p>
+		
+		<script>
+			function calc() {
+				let xval = document.getElementById('x').value;
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						console.log(document.getElementById('answer'));
+						document.getElementById('answer').innerHTML = "The degree of the adjacent angle is: " + this.responseText;
+					}
+				};
+				xhttp.open("POST", 'https://us-east1-it-5236-dms-project.cloudfunctions.net/function-1', true);
+				xhttp.setRequestHeader("Content-type", "application/json");
+				xhttp.send(JSON.stringify({x:xval}));
+			}
+		</script>
+	</body>
+</html>
