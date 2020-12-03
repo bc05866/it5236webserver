@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "17892b6a-c68d-41a7-abb1-cd8c71c41c18",
+		"name": "Collins_NewUICalcTests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Collins_ParallelogramTests",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3c7f236d-5e72-4317-97d9-2ecba8f47d26",
+						"exec": [
+							"pm.test(\"Status code is 200\", () => {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is present\", () => {\r",
+							"    pm.response.to.have.header(\"Content-Type\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Title element exists and equals Collins API Calculator\", () => {\r",
+							"    pm.expect(pm.response.text()).to.include('<title>Collins API Calculator</title>');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Content-Type header is text/html\", () => {\r",
+							"  pm.expect(pm.response.headers.get('Content-Type')).to.eql('text/html');\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status code name has string\", () => {\r",
+							"  pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Answer is 90\", () => {\r",
+							"    const responseJson = pm.response.json();\r",
+							"    pm.expect(responseJson.x).to.eql(\"180\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Cookie JSESSIONID is present\", () => {\r",
+							"  pm.expect(pm.cookies.has('JSESSIONID')).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Status test\", () => {\r",
+							"    pm.expect(pm.response.code).to.eql(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://brandoncollins.tech/jsapi/",
+					"protocol": "https",
+					"host": [
+						"brandoncollins",
+						"tech"
+					],
+					"path": [
+						"jsapi",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
